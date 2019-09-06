@@ -1,0 +1,211 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>co.gov.fna</groupId>
+	<artifactId>fna-spring-boot-2.0.8</artifactId>	
+	<packaging>jar</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Core personalizado para crear aplicaciones rest que utilizan spring-boot-2.0.8</name>
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.8.RELEASE</version>
+		<!-- <relativePath></relativePath> lookup parent from -->			
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<powermock.version>1.6.6</powermock.version>
+	</properties>
+
+	<dependencies>
+		<dependency>		
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>        
+		        <exclusion>
+		            <groupId>javax.validation</groupId>
+		            <artifactId>validation-api</artifactId>
+		        </exclusion>
+		        <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-api</artifactId>
+                </exclusion>
+                 <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-to-slf4j</artifactId>
+                </exclusion>
+                 <exclusion>
+                 	<groupId>org.hibernate.validator</groupId>
+                 	<artifactId>hibernate-validator</artifactId>
+                 </exclusion>
+			</exclusions>				
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- ** Librerias Spring data JPA ** ** Se excluye el api transaccional 
+			por incompatibilidad on WAS 8.5 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			 <exclusions>
+                <exclusion>
+                    <groupId>javax.transaction</groupId>
+                    <artifactId>javax.transaction-api</artifactId>
+                </exclusion>
+            </exclusions>
+									
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>		
+			<exclusions>
+                <exclusion>
+                    <groupId>com.sun.mail</groupId>
+                    <artifactId>javax.mail</artifactId>
+                </exclusion>
+            </exclusions>						
+		</dependency>
+		
+		<dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+		
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>			
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<scope>provided</scope>	
+		</dependency>
+		
+		<dependency>
+             <groupId>org.apache.logging.log4j</groupId>
+             <artifactId>log4j-to-slf4j</artifactId>
+             <scope>provided</scope>	
+		</dependency>
+																
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>5.3.6.Final</version>
+		    <exclusions> 
+		    	<exclusion>
+		    		<groupId>javax.validation</groupId>
+		    		<artifactId>validation-api</artifactId>
+		    	</exclusion>		    	
+		    </exclusions> 
+		</dependency>
+		
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>		    
+    	</dependency>
+    	
+    	<dependency>
+		    <groupId>javax.el</groupId>
+		    <artifactId>javax.el-api</artifactId>
+		    <version>3.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>			
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>		
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
+		</dependency>
+								
+		<dependency>
+			<groupId>org.powermock</groupId>
+      		<artifactId>powermock-module-junit4</artifactId>
+      		<version>${powermock.version}</version>
+      		<scope>test</scope>
+   		</dependency>
+   		
+	   <dependency>
+	      <groupId>org.powermock</groupId>
+	      <artifactId>powermock-api-mockito</artifactId>
+	      <version>${powermock.version}</version>
+	      <scope>test</scope>
+	   </dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>														
+                    
+		<!--  https://mvnrepository.com/artifact/com.sun.el/el-ri  -->
+		<!-- <dependency>
+		    <groupId>com.sun.el</groupId>
+		    <artifactId>el-ri</artifactId>
+		    <version>1.0</version>
+		</dependency>
+		-->
+    </dependencies>	
+ 
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+						
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+              
+		</plugins>
+	</build>
+
+
+</project>
